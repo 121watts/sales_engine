@@ -13,13 +13,10 @@ class  MerchantRepositoryTest<Minitest::Test
   end
 
   def test_has_merchants
-
     merchants = MerchantRepository.new
-    merchants.load
+    merchants.load(filename = 'test/fixtures/small_invoice_items.csv')
     names = merchants.find_by_name("Williamson Group")
     assert_equal 2, names.count
-    # merchants = merchant_repository.find_by_name("Williamson Group")
-    # assert_equal 2, merchants.length
   end
 
 end
