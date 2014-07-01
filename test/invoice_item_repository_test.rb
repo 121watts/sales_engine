@@ -4,10 +4,6 @@ require_relative '../lib/invoice_items'
 
 class  InvoiceItemRepositoryTest<Minitest::Test
 
-  # def filename
-  #   @filename ||= File.absolute_path("../fixtures/small_invoice_items.csv", __FILE__)
-  # end
-
   def invoice_item_repository
     InvoiceItemRepository.new
   end
