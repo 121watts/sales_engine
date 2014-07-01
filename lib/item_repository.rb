@@ -1,8 +1,12 @@
 require 'csv'
-require_relative 'repository'
+require_relative 'item'
 
-class ItemRepository < Repository
+class ItemRepository
   attr_reader :items
+
+  def load(filename)
+    @csv = CSV.open(filename, headers: true, header_converters: :symbol)
+  end
 
   def initialize
     @items = items

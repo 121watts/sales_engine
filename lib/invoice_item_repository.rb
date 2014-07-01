@@ -2,15 +2,10 @@ require 'csv'
 require_relative 'invoice_items'
 
 class InvoiceItemRepository
-
   attr_reader :invoice_items
 
   def load(filename)
     @csv = CSV.open(filename, headers: true, header_converters: :symbol)
-  end
-
-  def initialize
-    @invoice_items = invoice_items
   end
 
   def build_invoice_items
@@ -22,5 +17,4 @@ class InvoiceItemRepository
   def find_by_invoice_id(invoice_id)
     build_invoice_items.select { |invoice_item| invoice_item.invoice_id == invoice_id }
   end
-
 end

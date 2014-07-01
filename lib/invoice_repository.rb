@@ -1,9 +1,12 @@
 require 'csv'
-require_relative 'repository'
 require_relative 'invoice'
 
-class InvoiceRepository < Repository
+class InvoiceRepository
   attr_reader :invoices
+
+  def load(filename)
+    @csv = CSV.open(filename, headers: true, header_converters: :symbol)
+  end
 
   def build_invoices
     @invoices = @csv.collect do |row|
