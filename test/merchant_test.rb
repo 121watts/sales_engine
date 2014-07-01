@@ -3,19 +3,24 @@ require_relative '../lib/merchant'
 
 class MerchantTest < Minitest::Test
 
-  def test_entry_attributes
-    data = {
+  def data
+     {
     id:  '1',
     name: 'Your Mom',
     created_at: '2012-03-27 14:53:59 UTC',
     updated_at: '2012-03-27 14:53:59 UTC'
     }
-
-    merchant = Merchant.new(data)
-    assert_equal '1', merchant.id
-    assert_equal 'Your Mom', merchant.name
-    assert_equal '2012-03-27 14:53:59 UTC', merchant.created_at
-    assert_equal '2012-03-27 14:53:59 UTC', merchant.updated_at
   end
 
+  def test_it_exists
+    assert Merchant
+  end
+
+  def test_it_has_attributes
+    merchant = Merchant.new(data)
+    assert data[:id], merchant.id
+    assert data[:name], merchant.name
+    assert data[:created_at], merchant.created_at
+    assert data[:updated_at], merchant.updated_at
+  end
 end
