@@ -13,4 +13,6 @@ class CustomerRepository
       Customer.new(row)
     end
   end
+
+  
 end
