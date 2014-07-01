@@ -9,9 +9,9 @@ class MerchantRepository
     @csv = CSV.open(filename, headers: true, header_converters: :symbol)
   end
 
-  # def initialize
-  #   @merchants
-  # end
+  def initialize
+    @merchants = merchants
+  end
 
   def build_merchants
     @merchants = @csv.collect do |row|
@@ -19,7 +19,7 @@ class MerchantRepository
     end
   end
   #do we want this somewhere else?
-  def find_by_name(name)
+  def find_all_by_name(name)
     build_merchants.select { |merchant| merchant.name == name }
   end
 
