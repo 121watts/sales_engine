@@ -4,14 +4,33 @@ require_relative '../lib/item_repository'
 
 class ItemRepositoryTest < Minitest::Test
 
+  def setup
+    @items = ItemRepository.new
+    @items.load('./test/fixtures/small_items.csv')
+  end
+
   def test_it_exists
     assert ItemRepository
   end
 
-  def test_it_builds_merchants
-    repo = ItemRepository.new
-    repo.load('./test/fixtures/small_items.csv')
-    repo.build_items
-    assert_equal 5, repo.items.count
+  def test_it_builds_items
+    collection = @items.build_items
+    assert collection.count >= 5
+  end
+
+  def test_it_returns_empty_array_if_nothing_is_found
+    collection = @items.find_all_by_name("Smootchie Bootcies")
+    assert_equal [], collection
+  end
+
+  def test_it_finds_all_by_name
+    collection = @items.find_all_by_name("Item Eos Et")
+    assert collection.count >= 2
+  end
+
+  def test_if_it_finds_only_one_instance_with_find_by_name
+    collection = @items.find_by_name("Item Saepe Ipsum")
+    array = collection.select { |item| item}
+    assert_equal 1, array.count
   end
 end

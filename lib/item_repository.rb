@@ -18,6 +18,14 @@ class ItemRepository
     end
   end
 
+  def find_all_by_name(name)
+    build_items.select { |item| item.name == name }
+  end
+
+  def find_by_name(name)
+    build_items.select { |item| item.name == name }
+  end
+
   # def most_revenue(x)
   #   returns the top x item instances
   #   ranked by total revenue generated
