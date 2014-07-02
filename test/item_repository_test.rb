@@ -18,8 +18,20 @@ class ItemRepositoryTest < Minitest::Test
     assert collection.count >= 2
   end
 
-  # def test_if_it_finds_only_one_instance_with_find_by_name
-  #   collection = @items.find_by_name("Item Saepe Ipsum")
-  #   assert_equal 1, array.count
-  # end
+  def test_it_find_first_item_and_only_first_item
+    one_item = @items.find_by_name("Item Eos Et")
+    assert_equal 1, one_item.id
+  end
+
+  def test_it_finds_first_one_by_merchant_id_by_integer
+    one_item = @items.find_by_merchant_id(1)
+    assert_equal "75107", one_item.unit_price
+  end
+
+  def test_it_takes_integers_and_returns_integers_for_ids
+    one_item = @items.find_by_id(1)
+    assert_equal 1, one_item.id
+    assert_equal 1, one_item.merchant_id
+  end
+
 end

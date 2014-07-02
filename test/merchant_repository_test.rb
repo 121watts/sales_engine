@@ -11,10 +11,6 @@ class  MerchantRepositoryTest<Minitest::Test
     @merchants = MerchantRepository.new('./test/fixtures/small_merchants.csv')
   end
 
-  def test_merchant_instance_exists
-    assert MerchantRepository
-  end
-
   def test_if_nothing_is_found_empty_array_is_returned
     names = @merchants.find_all_by_name("Your Mom is Lame")
     assert_equal [], names
@@ -32,7 +28,13 @@ class  MerchantRepositoryTest<Minitest::Test
 
   def test_find_by_name_returns_first_instance
     merchant = @merchants.find_by_name("Williamson Group")
-    assert_equal "5", merchant.id
+    assert_equal "2012-03-27 14:53:59 UTC", merchant.created_at
   end
+
+  def test_find_by_id_takes_integers_and_returns_integers
+    merchant = @merchants.find_by_id(9)
+    assert_equal 9, merchant.id
+  end
+
 
 end

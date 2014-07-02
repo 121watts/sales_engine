@@ -9,7 +9,7 @@ class Repository
     @objects = CSV.open(filename, headers: true, header_converters: :symbol).collect do |row|
       class_name.new(row)
     end
-  end
+  end  
 
   def method_missing(meth, *args, &block)
     if meth.to_s =~ /^find_by_(.+)$/
