@@ -30,15 +30,19 @@ class SalesEngine
       @customer_repository     = CustomerRepository.new('./data/customers.csv')
       @transaction_repository  = TransactionRepository.new('./data/transactions.csv')
     end
+  end
     # Associate all items with merchants that sell them
+  def merchant
     merchants = @merchant_repository.all
     random_merchant = @merchant_repository.random
 
     merchants.each do |merchant|
-      merchant.items    = @item_repository.find_all_by_merchant_id(merchant.id)
+      items = merchant.items    = @item_repository.find_all_by_merchant_id(merchant.id)
       merchant.invoices = @invoice_repository.find_all_by_merchant_id(merchant.id)
     end
+  end
 
+  def invoice
     invoices = @invoice_repository.all
 
     invoices.each do |invoice|
@@ -48,27 +52,35 @@ class SalesEngine
       invoice.customer      = @customer_repository.find_by_id(invoice.customer_id)
       invoice.merchant      = @merchant_repository.find_by_id(invoice.merchant_id)
     end
+  end
 
+  def invoice_item
     invoice_items = @invoice_item_repository.all
 
     invoice_items.each do |invoice_item|
       invoice_item.invoice = @invoice_repository.find_by_id(invoice_item.invoice_id)
       invoice_item.item    = @item_repository.find_by_id(invoice_item.item_id)
     end
+  end
 
+  def item
     items = @item_repository.all
 
     items.each do |item|
       item.invoice_items = @invoice_item_repository.find_all_by_id(item.id)
       item.merchant      = @merchant_repository.find_by_id(item.merchant_id)
     end
+  end
 
+  def transaction
     transactions = @transaction_repository.all
 
     transactions.each do |transaction|
       transaction.invoice  = @invoice_repository.find_by_id(transaction.invoice_id)
     end
+  end
 
+  def customer
     customers = @customer_repository.all
 
     customers.each do |customer|
