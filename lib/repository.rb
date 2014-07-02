@@ -1,5 +1,3 @@
-require 'pry'
-
 class Repository
 
   attr_accessor :objects
@@ -9,7 +7,7 @@ class Repository
     @objects = CSV.open(filename, headers: true, header_converters: :symbol).collect do |row|
       class_name.new(row)
     end
-  end  
+  end
 
   def method_missing(meth, *args, &block)
     if meth.to_s =~ /^find_by_(.+)$/
@@ -37,13 +35,8 @@ class Repository
     @objects
   end
 
-  # Should probably put these in a finder class
-  # def find_by
-  # end
-  #
-  # def find_by_all
-  # end
-  #
-  # def random
-  # end
+  def random
+    @objects.sample
+  end
+
 end
