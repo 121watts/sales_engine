@@ -6,6 +6,12 @@ class Invoice
                 :created_at,
                 :updated_at
 
+    attr_accessor :transactions,
+                  :invoice_items,
+                  :items,
+                  :customer,
+                  :merchant
+
     def initialize(data)
       @id           = data[:id]
       @customer_id  = data[:customer_id]

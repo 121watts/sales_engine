@@ -1,18 +1,9 @@
 require 'csv'
 require_relative 'customer'
+require_relative 'repository'
 
-class CustomerRepository
-  attr_reader :customers
 
-  def load(filename)
-    @csv = CSV.open(filename, headers: true, header_converters: :symbol)
-  end
+class CustomerRepository < Repository
 
-  def build_customers
-    @customers = @csv.collect do |row|
-      Customer.new(row)
-    end
-  end
 
-  
 end

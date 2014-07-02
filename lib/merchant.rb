@@ -5,24 +5,15 @@ class Merchant
               :created_at,
               :updated_at
 
+  attr_accessor :items,
+                :invoices
+
   def initialize(data)
     @id         = data[:id]
     @name       = data[:name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
   end
-
-  # def items
-  #   returns a collection of Item instances
-  #   associated with that merchant
-  #   for the products they sell
-  # end
-  # 
-  # def invoices
-  #   returns a collection of Invoice instances
-  #   associated with that merchant
-  #   from their known orders
-  # end
 
   # def revenue
   #   returns the total revenue for

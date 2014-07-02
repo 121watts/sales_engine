@@ -4,14 +4,12 @@ require_relative '../lib/invoice_repository'
 
 class InvoiceRepositoryTest < Minitest::Test
 
-  def test_it_exists
-    assert InvoiceRepository
+  def setup
+    @invoices = InvoiceRepository.new('./test/fixtures/small_invoices.csv')
   end
 
   def test_it_builds_invoices
-    repo = InvoiceRepository.new
-    repo.load('./test/fixtures/small_invoices.csv')
-    repo.build_invoices
-    assert_equal 10, repo.invoices.count
+    shipped_invoices = @invoices.find_all_by_status("shipped")
+    assert shipped_invoices.count >= 7
   end
 end

@@ -12,10 +12,6 @@ class MerchantTest < Minitest::Test
     }
   end
 
-  def test_it_exists
-    assert Merchant
-  end
-
   def test_it_has_attributes
     merchant = Merchant.new(data)
     assert data[:id], merchant.id
