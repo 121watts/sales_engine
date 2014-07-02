@@ -7,16 +7,21 @@ require_relative 'transaction_repository'
 require_relative 'item_repository'
 
 class SalesEngine
-  attr_accessor :merchant_repository, :invoice_respository
+  attr_accessor :merchant_repository,
+                :invoice_respository,
+                :item_repository,
+                :invoice_item_repository,
+                :customer_repository,
+                :transaction_repository
 
   def startup(test_mode = false)
     if test_mode
-      @merchant_repository     = MerchantRepository.new('./data/merchants.csv')
-      @item_repository         = ItemRepository.new('./data/items.csv')
-      @invoice_repository      = InvoiceRepository.new('./data/invoices.csv')
-      @invoice_item_repository = InvoiceItemRepository.new('./data/invoice_items.csv')
-      @customer_repository     = CustomerRepository.new('./data/customers.csv')
-      @transaction_repository  = TransactionRepository.new('./data/transactions.csv')
+      @merchant_repository     = MerchantRepository.new('./test/fixtures/small_merchants.csv')
+      @item_repository         = ItemRepository.new('./test/fixtures/small_items.csv')
+      @invoice_repository      = InvoiceRepository.new('./test/fixtures/small_invoices.csv')
+      @invoice_item_repository = InvoiceItemRepository.new('./test/fixtures/small_invoice_items.csv')
+      @customer_repository     = CustomerRepository.new('./test/fixtures/small_customers.csv')
+      @transaction_repository  = TransactionRepository.new('./test/fixtures/small_transactions.csv')
     else
       @merchant_repository     = MerchantRepository.new('./data/merchants.csv')
       @item_repository         = ItemRepository.new('./data/items.csv')
@@ -43,5 +48,33 @@ class SalesEngine
       invoice.merchant      = @merchant_repository.find_by_id(invoice.merchant_id)
     end
 
+    invoice_items = @invoice_item_repository.all
+
+    invoice_items.each do |invoice_item|
+      invoice_item.invoice = @invoice_repository.find_by_id(invoice_item.invoice_id)
+      invoice_item.item    = @item_repository.find_by_id(invoice_item.item_id)
+    end
+
+    items = @item_repository.all
+
+    items.each do |item|
+      item.invoice_items = @invoice_item_repository.find_all_by_id(item.id)
+      item.merchant      = @merchant_repository.find_by_id(item.merchant_id)
+    end
+
+    transactions = @transaction_repository.all
+
+    transactions.each do |transaction|
+      transaction.invoice  = @invoice_repository.find_by_id(transaction.invoice_id)
+    end
+
+    customers = @customer_repository.all
+
+    customers.each do |customer|
+      customer.invoices = @invoice_repository.find_all_by_customer_id(customer.id)
+    end
   end
 end
+
+engine = SalesEngine.new
+engine.startup(true)

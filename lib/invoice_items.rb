@@ -9,6 +9,12 @@ class InvoiceItem
               :created_at,
               :updated_at
 
+  attr_accessor :invoice_items,
+                :invoice,
+                :item,
+                :items,
+                :merchant
+
   def initialize(data)
     @id         = data[:id]
     @item_id    = data[:item_id]

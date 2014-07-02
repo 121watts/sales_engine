@@ -7,6 +7,11 @@ class Item
               :created_at,
               :updated_at
 
+  attr_accessor :item_id,
+                :invoice_items,
+                :merchant
+
+
   def initialize(data)
     @id           = data[:id].to_i
     @name         = data[:name]

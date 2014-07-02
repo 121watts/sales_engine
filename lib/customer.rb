@@ -6,6 +6,8 @@ class Customer
               :created_at,
               :updated_at
 
+  attr_reader :invoices
+
   def initialize(data)
     @id         = data[:id]
     @first_name = data[:first_name]
@@ -29,5 +31,5 @@ class Customer
   #   returns an instance of Merchant where
   #   the customer has conducted the most successful transactions
   # end
-  
+
 end

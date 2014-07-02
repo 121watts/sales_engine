@@ -7,6 +7,8 @@ class Transaction
               :created_at,
               :updated_at
 
+  attr_accessor :invoice
+
   def initialize(data)
     @id                           = data[:id].to_i
     @invoice_id                   = data[:invoice_id].to_i
