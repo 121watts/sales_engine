@@ -6,7 +6,7 @@ class Customer
               :created_at,
               :updated_at
 
-  attr_reader :invoices
+  attr_accessor :invoices
 
   def initialize(data)
     @id         = data[:id]
@@ -16,6 +16,9 @@ class Customer
     @updated_at = data[:updated_at]
   end
 
+def invoices
+  @invoice_repository.find_all_by_customer_id(id)
+end
 
   # def invoices
   #   returns a collection of Invoice instances

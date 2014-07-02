@@ -15,13 +15,9 @@ class InvoiceTest < Minitest::Test
      }
   end
 
-  def test_it_exists
-    assert Invoice
-  end
-
   def test_it_has_attributes
     invoice = Invoice.new(data)
-    assert data[:id], invoice.id
+    assert 1, invoice.id
     assert data[:customer_id], invoice.customer_id
     assert data[:merchant_id], invoice.merchant_id
     assert data[:status], invoice.status

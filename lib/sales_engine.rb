@@ -32,6 +32,7 @@ class SalesEngine
     end
     # Associate all items with merchants that sell them
     merchants = @merchant_repository.all
+    random_merchant = @merchant_repository.random
 
     merchants.each do |merchant|
       merchant.items    = @item_repository.find_all_by_merchant_id(merchant.id)
@@ -43,7 +44,7 @@ class SalesEngine
     invoices.each do |invoice|
       invoice.transactions  = @transaction_repository.find_all_by_invoice_id(invoice.id)
       invoice.invoice_items = @invoice_item_repository.find_all_by_invoice_id(invoice.id)
-      # invoice.items         = @item_repository.find_all_by_invoice_id(invoice.id)
+      # invoice.items         = @invoice_item_repository.find_all_by_item_id(invoice.id)
       invoice.customer      = @customer_repository.find_by_id(invoice.customer_id)
       invoice.merchant      = @merchant_repository.find_by_id(invoice.merchant_id)
     end
