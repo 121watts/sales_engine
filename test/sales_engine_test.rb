@@ -31,14 +31,4 @@ class SalesEngineTest < Minitest::Test
       items     = engine.item_repository.find_all_by_merchant_id(merchant.id)
       p items.count
     end
-
-    # def test_invoice_relationships
-    #   engine = SalesEngine.new
-    #   engine.startup(true)
-    #
-    #   invoice = engine.invoice_repository.find_by_id(1)
-    #   assert invoice.transaction == transaction
-    #   invoice                       = engine.invoice_repository.find_by_id(1)
-    #   assert invoice.transaction   == transaction
-    # end
 end

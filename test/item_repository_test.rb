@@ -15,7 +15,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_it_finds_all_by_name
     collection = @items.find_all_by_name("Item Qui Esse")
-    assert collection.count >= 2
+    assert collection.count >= 1
   end
 
   def test_it_find_first_item_and_only_first_item
