@@ -25,8 +25,11 @@ class SalesEngineTest < Minitest::Test
       engine = SalesEngine.new
       engine.startup(true)
 
-      merchant = engine.merchant_repository
-      
+      merchants = engine.merchant_repository
+      merchant  = merchants.find_by_name("Klein, Rempel and Jones")
+      p merchant.id
+      items     = engine.item_repository.find_all_by_merchant_id(merchant.id)
+      p items.count
     end
 
     # def test_invoice_relationships

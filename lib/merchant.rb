@@ -13,6 +13,8 @@ class Merchant
     @name       = data[:name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
+    @items      = data[:items]
+    @invoices   = data[:invoices]
   end
 
 
