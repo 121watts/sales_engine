@@ -15,6 +15,8 @@ class Merchant
     @updated_at = data[:updated_at]
   end
 
+
+
   # def revenue
   #   returns the total revenue for
   #   that merchant across all transactions

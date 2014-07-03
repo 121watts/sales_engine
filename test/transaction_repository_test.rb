@@ -20,7 +20,7 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_it_finds_only_one_id
     one_id = @transactions.find_by_result("failed")
-    assert_equal 4, one_id.id
+    assert_equal 11, one_id.id
   end
 
   def test_it_finds_all_by_result

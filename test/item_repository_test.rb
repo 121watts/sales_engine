@@ -14,12 +14,12 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_finds_all_by_name
-    collection = @items.find_all_by_name("Item Eos Et")
+    collection = @items.find_all_by_name("Item Qui Esse")
     assert collection.count >= 2
   end
 
   def test_it_find_first_item_and_only_first_item
-    one_item = @items.find_by_name("Item Eos Et")
+    one_item = @items.find_by_name("Item Qui Esse")
     assert_equal 1, one_item.id
   end
 
