@@ -1,6 +1,11 @@
-class Repository
+require 'csv'
 
+class Repository
   attr_accessor :objects
+
+  def inspect
+    "#<Repository>"
+  end
 
   def initialize(filename)
     class_name = Kernel.const_get(self.class.to_s.gsub("Repository", ""))
@@ -8,6 +13,7 @@ class Repository
       class_name.new(row)
     end
   end
+
 
   def method_missing(meth, *args, &block)
     if meth.to_s =~ /^find_by_(.+)$/
@@ -38,5 +44,4 @@ class Repository
   def random
     @objects.sample
   end
-
 end

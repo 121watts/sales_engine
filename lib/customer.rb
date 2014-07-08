@@ -8,6 +8,10 @@ class Customer
 
   attr_accessor :invoices
 
+  def inspect
+      "#<#{self.class} #{@customers.size} rows>"
+    end
+
   def initialize(data)
     @id         = data[:id]
     @first_name = data[:first_name]
@@ -15,10 +19,6 @@ class Customer
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
   end
-
-def invoices
-  @invoice_repository.find_all_by_customer_id(id)
-end
 
   # def invoices
   #   returns a collection of Invoice instances
