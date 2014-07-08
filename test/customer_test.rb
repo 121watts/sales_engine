@@ -22,4 +22,9 @@ class CustomerTest < Minitest::Test
     assert data[:updated_at], customer.updated_at
   end
 
+  def test_it_can_read_invoices
+    customer = Customer.new(data)
+    p customer.invoices
+  end
+
 end
