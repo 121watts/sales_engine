@@ -14,21 +14,19 @@ class SalesEngineTest < Minitest::Test
     end
 
     def test_can_find_multiple_records
-      engine = SalesEngine.new
-      engine.startup(true)
+      engine = SalesEngine.new(true)
 
       merchants = engine.merchant_repository.find_all_by_name "Williamson Group"
       assert_equal 2, merchants.count
     end
 
     def test_merchant_relationships
-      engine = SalesEngine.new
-      engine.startup(true)
-
+      engine = SalesEngine.new(true)
       merchants = engine.merchant_repository
       merchant  = merchants.find_by_name("Klein, Rempel and Jones")
-      p merchant.id
+      assert_equal 2, merchant.id
       items     = engine.item_repository.find_all_by_merchant_id(merchant.id)
-      p items.count
+      assert items.count > 30
     end
+
 end

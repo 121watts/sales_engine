@@ -18,7 +18,11 @@ class Merchant
   end
 
 
-
+  def revenue
+    invoices.map(&:transactions).each do |transaction|
+      # figure out monies here?
+    end
+  end
   # def revenue
   #   returns the total revenue for
   #   that merchant across all transactions
