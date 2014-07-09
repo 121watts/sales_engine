@@ -33,4 +33,5 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 1, transaction.id
     assert_equal 1, transaction.invoice_id
   end
+  
 end

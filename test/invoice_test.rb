@@ -24,4 +24,5 @@ class InvoiceTest < Minitest::Test
     assert data[:created_at], invoice.created_at
     assert data[:updated_at], invoice.updated_at
   end
+
 end

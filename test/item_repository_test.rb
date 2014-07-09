@@ -25,7 +25,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_it_finds_first_one_by_merchant_id_by_integer
     one_item = @items.find_by_merchant_id(1)
-    assert_equal "75107", one_item.unit_price
+    assert_equal 751.07, one_item.unit_price.to_f
   end
 
   def test_it_takes_integers_and_returns_integers_for_ids

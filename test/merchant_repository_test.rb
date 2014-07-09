@@ -7,6 +7,18 @@ class  MerchantRepositoryTest<Minitest::Test
     @merchants = MerchantRepository.new('./test/fixtures/merchants.csv')
   end
 
+  def test_randomness
+    merchant1 = @merchants.random
+    merchant2 = @merchants.random
+
+    assert merchant1 != merchant2
+  end
+
+  def test_all_things_gotten
+    all_merchants = @merchants.all
+    assert all_merchants.count > 39
+  end
+
   def test_if_nothing_is_found_empty_array_is_returned
     names = @merchants.find_all_by_name("Your Mom is Lame")
     assert_equal [], names
@@ -30,13 +42,6 @@ class  MerchantRepositoryTest<Minitest::Test
   def test_find_by_id_takes_integers_and_returns_integers
     merchant = @merchants.find_by_id(9)
     assert_equal 9, merchant.id
-  end
-
-  def test_randomness
-    merchant1 = @merchants.random
-    merchant2 = @merchants.random
-
-    assert merchant1 != merchant2
   end
 
   def test_can_find_multiple_records

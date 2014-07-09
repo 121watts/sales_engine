@@ -20,13 +20,4 @@ class MerchantTest < Minitest::Test
     assert data[:updated_at], merchant.updated_at
   end
 
-  def test_revenue
-    skip
-    merchant = Merchant.new
-    invoice = Invoice.new
-    invoice_item = InvoiceItem.new(quantity: 5, unit_price: 100)
-    invoice.invoice_items << invoice_item
-    merchant.invoices << invoice
-    assert_equal 500, merchant.revenue
-  end
 end
