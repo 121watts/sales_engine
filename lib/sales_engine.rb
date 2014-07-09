@@ -53,7 +53,7 @@ class SalesEngine
     end
   end
 
-  def invoice_item_collection(invoice)
+  def invoice_items_collection(invoice)
     @items = invoice.invoice_items.map { |invoice_item| invoice_item.item }
   end
 
@@ -63,7 +63,7 @@ class SalesEngine
       invoice.invoice_items = @invoice_item_repository.find_all_by_invoice_id(invoice.id)
       invoice.customer      = @customer_repository.find_by_id(invoice.customer_id)
       invoice.merchant      = @merchant_repository.find_by_id(invoice.merchant_id)
-      #invoice.items         = invoice_items_collection(invoice) # => This is failing
+      invoice.items         = invoice_items_collection(invoice) # => This is failing
     end
   end
 
