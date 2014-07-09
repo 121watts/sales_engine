@@ -9,6 +9,7 @@ class SalesEngineTest < Minitest::Test
 
   attr_reader :engine
 
+  # TODO: Do these go here?
   def test_randomness
     engine = SalesEngine.new(fixture_csv_dir)
     engine.startup
@@ -23,29 +24,5 @@ class SalesEngineTest < Minitest::Test
     engine.startup
     merchants = engine.merchant_repository.find_all_by_name "Williamson Group"
     assert_equal 2, merchants.count
-  end
-
-  def test_merchant_item_relationships
-    engine = SalesEngine.new(fixture_csv_dir)
-    engine.startup
-    merchants = engine.merchant_repository
-    merchant  = merchants.find_by_name("Klein, Rempel and Jones")
-    assert_equal 2, merchant.id
-    items     = engine.item_repository.find_all_by_merchant_id(merchant.id)
-    assert items.count > 30
-  end
-
-  def test_includes_known_item
-    engine = SalesEngine.new(fixture_csv_dir)
-    engine.startup
-    item = engine.item_repository.find_by_name('Item Consequatur Eius')
-    refute item.nil?
-  end
-
-  def test_merchant_invoices
-    engine = SalesEngine.new(fixture_csv_dir)
-    engine.startup
-    invoices = engine.invoice_repository
-    invoices.find_by_merchant_id()
   end
 end
