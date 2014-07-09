@@ -36,5 +36,16 @@ class  MerchantRepositoryTest<Minitest::Test
     assert_equal 9, merchant.id
   end
 
+  def test_randomness
+    merchant1 = @merchants.random
+    merchant2 = @merchants.random
+
+    assert merchant1 != merchant2
+  end
+
+  def test_can_find_multiple_records
+    named_merchants = @merchants.find_all_by_name "Williamson Group"
+    assert_equal 2, named_merchants.count
+  end
 
 end
