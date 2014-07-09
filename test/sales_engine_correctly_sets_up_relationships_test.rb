@@ -35,6 +35,11 @@ class SalesEngineTest < Minitest::Test
     assert_equal Invoice, transaction.invoice.class
   end
 
+  def test_invoice_item_relationship_test
+    item = engine.item_repository.find_by_name("Item Accusamus Officia")
+    assert_equal 1326, invoice.item_id
+  end
+
   def test_includes_known_item
     item = engine.item_repository.find_by_name('Item Consequatur Eius')
     refute item.nil?
