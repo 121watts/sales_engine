@@ -8,6 +8,10 @@ class Merchant
   attr_accessor :items,
                 :invoices
 
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
   def initialize(data)
     @id         = data[:id].to_i
     @name       = data[:name]

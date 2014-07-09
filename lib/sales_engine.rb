@@ -1,4 +1,3 @@
-require 'csv'
 require_relative 'merchant_repository'
 require_relative 'customer_repository'
 require_relative 'invoice_item_repository'
@@ -10,7 +9,7 @@ require          'pry'
 class SalesEngine
 
   attr_accessor :merchant_repository,
-                :invoice_respository,
+                :invoice_repository,
                 :item_repository,
                 :invoice_item_repository,
                 :customer_repository,
@@ -29,6 +28,7 @@ class SalesEngine
 
     transaction_relationships
     merchant_relationships
+    invoice_relationships
     invoice_item_relationships
     item_relationships
     customer_relationships
@@ -52,8 +52,6 @@ class SalesEngine
     @transaction_repository  = TransactionRepository.new('./data/transactions.csv')
   end
 
-
-
   def merchant_relationships
     merchant_repository.all.each do |merchant|
       merchant.items    = @item_repository.find_all_by_merchant_id(merchant.id)
@@ -71,11 +69,11 @@ class SalesEngine
       invoice.invoice_items = @invoice_item_repository.find_all_by_invoice_id(invoice.id)
       invoice.customer      = @customer_repository.find_by_id(invoice.customer_id)
       invoice.merchant      = @merchant_repository.find_by_id(invoice.merchant_id)
-      invoice.items         = invoice_items_collection(invoice)
+      #invoice.items         = invoice_items_collection(invoice) # => This is failing
     end
   end
 
-  def invoice_item_relationships
+    def invoice_item_relationships
     invoice_item_repository.all.each do |invoice_item|
       invoice_item.invoice = @invoice_repository.find_by_id(invoice_item.invoice_id)
       invoice_item.item    = @item_repository.find_by_id(invoice_item.item_id)
@@ -101,6 +99,61 @@ class SalesEngine
     end
   end
 end
+
+#   # def most_rev
+# #################################################################################
+# # builds an item_id/total_rev hash
+#   def revenue_per_item
+#     items = @invoice_item_repository.all
+#     revenue_per_item = []
+#     items.each do |item|
+#       total_revenue = (item.quantity.to_i * item.unit_price.to_i)
+#       @revenue_per_item << { item.item_id => total_revenue}.reduce
+#     end
+#   end
+# #################################################################################
+# # totals revenue for each item
+#   def total_item_revenue
+#     total_item_revenue = Hash.new(0)
+#     @revenue_per_item.each { |key, count| total_item_revenue[key] += count }
+#     @total_item_revenue
+#   end
+# #################################################################################
+# # builds an item_id/merchant_id hash
+#   def merchant_item_id
+#     items = @item_repository.all
+#     merchant_items = []
+#     items.collect do |item|
+#       @merchant_items << {item.id => item.merchant_id}
+#     end
+#     @merchant_items
+#   end
+# ################################################################################
+# #
+#   def merchant_item_revenue
+#     @new_array = []
+#     @merchant_items.each do |merch_item|
+#       merch_item.merge(total_item_revenue) {|key, value1, value2|
+#       @new_array << {value1 => value2} }
+#     end
+#   end
+# #################################################################################
+# #
+#   def most_revenue(x)
+#     revenue_per_item
+#     total_item_revenue
+#     merchant_item_id
+#     merchant_item_revenue
+#     merchant_total_revenue = @new_array.group_by(&:keys).map{|k, v|
+#       {k.first => v.flat_map(&:values).reduce(:+)}}
+#     sorted_merchs = merchant_total_revenue.sort_by { |merchant| -merchant.values}
+#     p sorted_merchs[0...x]
+#   end
+# #################################################################################
+#
+# engine = SalesEngine.new
+# engine.startup
+
 
 engine = SalesEngine.new(true)
 engine.startup

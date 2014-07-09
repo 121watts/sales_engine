@@ -12,6 +12,10 @@ class Invoice
                   :customer,
                   :merchant
 
+    def inspect
+      "#<#{self.class} #{@invoices.size} rows>"
+    end
+
     def initialize(data)
       @id           = data[:id].to_i
       @customer_id  = data[:customer_id].to_i

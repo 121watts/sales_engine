@@ -9,6 +9,10 @@ class Transaction
 
   attr_accessor :invoice
 
+  def inspect
+      "#<#{self.class} #{@transactions.size} rows>"
+    end
+
   def initialize(data)
     @id                           = data[:id].to_i
     @invoice_id                   = data[:invoice_id].to_i
