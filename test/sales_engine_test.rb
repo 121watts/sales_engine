@@ -3,10 +3,15 @@ require_relative '../lib/sales_engine'
 
 class SalesEngineTest < Minitest::Test
 
-    def test_merchant_randomness
-      engine = SalesEngine.new
-      engine.startup(true)
+    attr_reader :engine
 
+    def setup
+      engine = SalesEngine.new(true)
+      engine.startup
+    end
+
+    def test_merchant_randomness
+      engine.startup
       merchant1 = engine.merchant_repository.random
       merchant2 = engine.merchant_repository.random
 

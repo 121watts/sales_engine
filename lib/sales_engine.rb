@@ -27,10 +27,10 @@ class SalesEngine
       real_repos
     end
 
+    transaction_relationships
     merchant_relationships
     invoice_item_relationships
     item_relationships
-    transaction_relationships
     customer_relationships
   end
 
@@ -82,10 +82,9 @@ class SalesEngine
     end
   end
 
-  def item_relationships
-    @item_repository.all.each do |item|
-      item.invoice_items = @invoice_item_repository.find_all_by_id(item.id)
-      item.merchant      = @merchant_repository.find_by_id(item.merchant_id)
+  def customer_relationships
+    @customer_repository.all.each do |customer|
+      customer.invoices = @invoice_repository.find_all_by_customer_id(customer.id)
     end
   end
 
@@ -95,12 +94,13 @@ class SalesEngine
     end
   end
 
-  def customer_relationships
-    @customer_repository.all.each do |customer|
-      customer.invoices = @invoice_repository.find_all_by_customer_id(customer.id)
+  def item_relationships
+    @item_repository.all.each do |item|
+      item.invoice_items = @invoice_item_repository.find_all_by_id(item.id)
+      item.merchant      = @merchant_repository.find_by_id(item.merchant_id)
     end
   end
-
 end
 
 engine = SalesEngine.new(true)
+engine.startup
