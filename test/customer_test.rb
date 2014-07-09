@@ -23,8 +23,9 @@ class CustomerTest < Minitest::Test
   end
 
   def test_it_can_read_invoices
+    skip
     customer = Customer.new(data)
-    p customer.invoices
+    raise 'implement me!'
   end
 
 end
