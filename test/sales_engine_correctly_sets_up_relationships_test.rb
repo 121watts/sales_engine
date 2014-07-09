@@ -22,14 +22,33 @@ class SalesEngineTest < Minitest::Test
     assert_equal merchant, item.merchant
   end
 
+  def test_customers_invoices_relationships
+    customer = engine.customer_repository.find_by_last_name("Daugherty")
+    assert customer.invoices.count > 7
+    invoice = customer.invoices.find { |invoice| invoice.id == 22 }
+    assert Customer, invoice.customer.class
+  end
+
+    #transaction invoices
+  def test_transaction_invoice_relationships
+    transaction = engine.transaction_repository.find_by_id(11)
+    assert_equal Invoice, transaction.invoice.class
+  end
+
   def test_includes_known_item
     item = engine.item_repository.find_by_name('Item Consequatur Eius')
     refute item.nil?
   end
 
   def test_merchant_invoices
-    invoices = engine.invoice_repository
-    invoices.find_by_merchant_id()
+    merchant = engine.merchant_repository.find_by_id(1)
+    assert merchant.invoices.count > 2
+    invoice = merchant.invoices.find { |invoice| invoice.id == 29 }
+    assert_equal merchant, invoice.merchant
   end
+
+
+
+
 
 end

@@ -21,6 +21,7 @@ class MerchantTest < Minitest::Test
   end
 
   def test_revenue
+    skip
     merchant = Merchant.new
     invoice = Invoice.new
     invoice_item = InvoiceItem.new(quantity: 5, unit_price: 100)

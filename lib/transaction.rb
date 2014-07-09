@@ -9,6 +9,7 @@ class Transaction
 
   attr_accessor :invoice
 
+
   def inspect
       "#<#{self.class} #{@transactions.size} rows>"
     end
@@ -23,8 +24,5 @@ class Transaction
     @updated_at                   = data[:updated_at]
   end
 
-  # def invoice
-  #    returns an instance of Invoice
-  #    associated with this object
-  # end
+
 end

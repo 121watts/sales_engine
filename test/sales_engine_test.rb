@@ -7,8 +7,5 @@ class SalesEngineTest < Minitest::Test
     File.expand_path '../fixtures', __FILE__
   end
 
-  attr_reader :engine
-
-  # TODO: Do these go here?
 
 end

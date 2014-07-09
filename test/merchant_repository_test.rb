@@ -3,10 +3,6 @@ require_relative '../lib/merchant_repository'
 
 class  MerchantRepositoryTest<Minitest::Test
 
-#startup engine?
-#loader class?
-#one to many?
-
   def setup
     @merchants = MerchantRepository.new('./test/fixtures/merchants.csv')
   end

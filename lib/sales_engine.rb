@@ -39,10 +39,17 @@ class SalesEngine
     @transaction_repository  = TransactionRepository.new "#{@csv_directory}/transactions.csv"
   end
 
+
   def merchant_relationships
     merchant_repository.all.each do |merchant|
       merchant.items    = @item_repository.find_all_by_merchant_id(merchant.id)
       merchant.invoices = @invoice_repository.find_all_by_merchant_id(merchant.id)
+    end
+  end
+
+  def customer_relationships
+    @customer_repository.all.each do |customer|
+      customer.invoices = @invoice_repository.find_all_by_customer_id(customer.id)
     end
   end
 
@@ -67,12 +74,6 @@ class SalesEngine
     end
   end
 
-  def customer_relationships
-    @customer_repository.all.each do |customer|
-      customer.invoices = @invoice_repository.find_all_by_customer_id(customer.id)
-    end
-  end
-
   def transaction_relationships
     @transaction_repository.all.each do |transaction|
       transaction.invoice  = @invoice_repository.find_by_id(transaction.invoice_id)
@@ -86,6 +87,8 @@ class SalesEngine
     end
   end
 end
+
+
 
 #   # def most_rev
 # #################################################################################
