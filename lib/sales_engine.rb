@@ -15,16 +15,12 @@ class SalesEngine
                 :customer_repository,
                 :transaction_repository
 
-  def initialize(test_mode = false)
-    @test_mode = test_mode
+  def initialize(csv_directory)
+    @csv_directory = csv_directory
   end
 
   def startup
-    if @test_mode == true
-      test_repos
-    else
-      real_repos
-    end
+    load_repos
 
     transaction_relationships
     merchant_relationships
@@ -34,22 +30,13 @@ class SalesEngine
     customer_relationships
   end
 
-  def test_repos
-    @merchant_repository     = MerchantRepository.new('./test/fixtures/small_merchants.csv')
-    @item_repository         = ItemRepository.new('./test/fixtures/small_items.csv')
-    @invoice_repository      = InvoiceRepository.new('./test/fixtures/small_invoices.csv')
-    @invoice_item_repository = InvoiceItemRepository.new('./test/fixtures/small_invoice_items.csv')
-    @customer_repository     = CustomerRepository.new('./test/fixtures/small_customers.csv')
-    @transaction_repository  = TransactionRepository.new('./test/fixtures/small_transactions.csv')
-  end
-
-  def real_repos
-    @merchant_repository     = MerchantRepository.new('./data/merchants.csv')
-    @item_repository         = ItemRepository.new('./data/items.csv')
-    @invoice_repository      = InvoiceRepository.new('./data/invoices.csv')
-    @invoice_item_repository = InvoiceItemRepository.new('./data/invoice_items.csv')
-    @customer_repository     = CustomerRepository.new('./data/customers.csv')
-    @transaction_repository  = TransactionRepository.new('./data/transactions.csv')
+  def load_repos
+    @merchant_repository     = MerchantRepository.new    "#{@csv_directory}/merchants.csv"
+    @item_repository         = ItemRepository.new        "#{@csv_directory}/items.csv"
+    @invoice_repository      = InvoiceRepository.new     "#{@csv_directory}/invoices.csv"
+    @invoice_item_repository = InvoiceItemRepository.new "#{@csv_directory}/invoice_items.csv"
+    @customer_repository     = CustomerRepository.new    "#{@csv_directory}/customers.csv"
+    @transaction_repository  = TransactionRepository.new "#{@csv_directory}/transactions.csv"
   end
 
   def merchant_relationships
@@ -153,7 +140,3 @@ end
 #
 # engine = SalesEngine.new
 # engine.startup
-
-
-engine = SalesEngine.new(true)
-engine.startup
