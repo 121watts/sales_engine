@@ -49,12 +49,8 @@ class SalesEngine
 
   def customer_relationships
     @customer_repository.all.each do |customer|
-      customer.invoices = @invoice_repository.find_all_by_customer_id(customer.id)
+      customer.invoices      = @invoice_repository.find_all_by_customer_id(customer.id)
     end
-  end
-
-  def invoice_items_collection(invoice)
-    @items = invoice.invoice_items.map { |invoice_item| invoice_item.item }
   end
 
   def invoice_relationships
@@ -67,10 +63,15 @@ class SalesEngine
     end
   end
 
-    def invoice_item_relationships
+  def invoice_items_collection(invoice)
+    @items = invoice.invoice_items.map { |invoice_item| invoice_item.items }
+  end
+
+  def invoice_item_relationships
     invoice_item_repository.all.each do |invoice_item|
       invoice_item.invoice = @invoice_repository.find_by_id(invoice_item.invoice_id)
       invoice_item.item    = @item_repository.find_by_id(invoice_item.item_id)
+      invoice_item.items   = @item_repository.find_all_by_id(invoice_item.item_id)
     end
   end
 
