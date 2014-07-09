@@ -29,7 +29,6 @@ class SalesEngineTest < Minitest::Test
     assert Customer, invoice.customer.class
   end
 
-    #transaction invoices
   def test_transaction_invoice_relationships
     transaction = engine.transaction_repository.find_by_id(11)
     assert_equal Invoice, transaction.invoice.class
@@ -46,9 +45,6 @@ class SalesEngineTest < Minitest::Test
     invoice = merchant.invoices.find { |invoice| invoice.id == 29 }
     assert_equal merchant, invoice.merchant
   end
-
-
-
 
 
 end
