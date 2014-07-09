@@ -5,7 +5,7 @@ require_relative '../lib/transaction_repository'
 class TransactionRepositoryTest < Minitest::Test
 
   def setup
-    @transactions = TransactionRepository.new('./test/fixtures/small_transactions.csv')
+    @transactions = TransactionRepository.new('./test/fixtures/transactions.csv')
   end
 
   def test_it_returns_empty_array_if_nothing_is_found

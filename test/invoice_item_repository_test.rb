@@ -6,7 +6,7 @@ class  InvoiceItemRepositoryTest<Minitest::Test
     attr_reader :engine
 
   def setup
-    @invoice_items = InvoiceItemRepository.new('test/fixtures/small_invoice_items.csv')
+    @invoice_items = InvoiceItemRepository.new('test/fixtures/invoice_items.csv')
   end
 
   def test_it_takes_integer_and_returns_integer

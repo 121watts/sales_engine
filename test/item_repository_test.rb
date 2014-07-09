@@ -5,7 +5,7 @@ require_relative '../lib/item_repository'
 class ItemRepositoryTest < Minitest::Test
 
   def setup
-    @items = ItemRepository.new('./test/fixtures/small_items.csv')
+    @items = ItemRepository.new('./test/fixtures/items.csv')
   end
 
   def test_it_returns_empty_array_if_nothing_is_found

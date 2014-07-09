@@ -8,7 +8,7 @@ class  MerchantRepositoryTest<Minitest::Test
 #one to many?
 
   def setup
-    @merchants = MerchantRepository.new('./test/fixtures/small_merchants.csv')
+    @merchants = MerchantRepository.new('./test/fixtures/merchants.csv')
   end
 
   def test_if_nothing_is_found_empty_array_is_returned

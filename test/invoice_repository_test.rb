@@ -5,7 +5,7 @@ require_relative '../lib/invoice_repository'
 class InvoiceRepositoryTest < Minitest::Test
 
   def setup
-    @invoices = InvoiceRepository.new('./test/fixtures/small_invoices.csv')
+    @invoices = InvoiceRepository.new('./test/fixtures/invoices.csv')
   end
 
   def test_it_builds_and_finds_invoices
