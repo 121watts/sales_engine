@@ -15,10 +15,6 @@ class TransactionTest < Minitest::Test
     }
   end
 
-  def test_it_exists
-    assert Transaction
-  end
-
   def test_it_has_attributes
     transaction = Transaction.new(data)
     assert data[:id], transaction.id

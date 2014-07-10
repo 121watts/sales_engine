@@ -4,7 +4,6 @@ require_relative 'invoice_item_repository'
 require_relative 'invoice_repository'
 require_relative 'transaction_repository'
 require_relative 'item_repository'
-require          'pry'
 
 class SalesEngine
 
@@ -53,6 +52,11 @@ class SalesEngine
     end
   end
 
+  def invoice_items_collection(invoice)
+    @item_ids = invoice.invoice_items.map { |invoice_item| invoice_item.item_id }
+    @items    = @item_ids.map { |id| item_repository.find_by_id(id) }
+  end
+
   def invoice_relationships
     invoice_repository.all.each do |invoice|
       invoice.transactions  = @transaction_repository.find_all_by_invoice_id(invoice.id)
@@ -61,10 +65,6 @@ class SalesEngine
       invoice.merchant      = @merchant_repository.find_by_id(invoice.merchant_id)
       invoice.items         = invoice_items_collection(invoice)
     end
-  end
-
-  def invoice_items_collection(invoice)
-    @items = invoice.invoice_items.map { |invoice_item| invoice_item.items }
   end
 
   def invoice_item_relationships
@@ -83,7 +83,7 @@ class SalesEngine
 
   def item_relationships
     @item_repository.all.each do |item|
-      item.invoice_items = @invoice_item_repository.find_all_by_id(item.id)
+      item.invoice_items = @invoice_item_repository.find_all_by_item_id(item.id)
       item.merchant      = @merchant_repository.find_by_id(item.merchant_id)
     end
   end

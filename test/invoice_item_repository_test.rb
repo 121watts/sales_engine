@@ -3,30 +3,44 @@ require_relative '../lib/invoice_item_repository'
 require_relative '../lib/invoice_items'
 
 class  InvoiceItemRepositoryTest<Minitest::Test
-    attr_reader :engine
 
   def setup
     @invoice_items = InvoiceItemRepository.new('test/fixtures/invoice_items.csv')
   end
 
-  def test_it_takes_integer_and_returns_integer
-    invoice_item = @invoice_items.find_by_id(10)
-    assert_equal 1830, invoice_item.item_id
-    assert_equal 2,    invoice_item.invoice_id
-    assert_equal 4,    invoice_item.quantity
+  def test_it_returns_empty_array_if_nothing_is_found
+    quantity = @invoice_items.find_all_by_quantity(100000)
+    assert_equal [], quantity
   end
 
-  def test_it_finds_multiple_invoices
-    invoice_items = @invoice_items.find_all_by_invoice_id(1)
-    assert invoice_items.count >= 5
+  def test_it_returns_a_random_invoice_item
+    invoice_item1 = @invoice_items.random
+    invoice_item2 = @invoice_items.random
+    assert invoice_item1 != invoice_item2
   end
 
-  def test_it_finds_by_item_id
-    invoice_item = @invoice_items.find_by_item_id(539)
-    assert_equal 1, invoice_item.id
-    assert_equal 1, invoice_item.invoice_id
-    assert_equal 5, invoice_item.quantity
-    assert_equal '13635', invoice_item.unit_price
+  def test_it_returns_all_invoice_items
+    all_invoice_items = @invoice_items.all
+    assert all_invoice_items.count > 150
   end
 
+  def test_it_returns_all_items_by_invoice_id
+    collection = @invoice_items.find_all_by_invoice_id(3)
+    assert collection.count > 7
+  end
+
+  def test_it_returns_a_single_invoice_item
+    invoice_item = @invoice_items.find_by_id(1)
+    assert_equal 539, invoice_item.item_id
+  end
 end
+#
+#   def test_it_converts_unit_price_to_big_decimal
+#     item = @items.find_by_name("Item Nemo Facere")
+#     assert_equal 0.4291E2, item.unit_price
+#   end
+#
+#   def test_it_returns_an_item_by_a_specific_unit_price
+#     item = @items.find_by_unit_price(0.69338E3)
+#     assert_equal "Item Dolorem Et", item.name
+#   end
