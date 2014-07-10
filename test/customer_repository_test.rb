@@ -20,7 +20,7 @@ class  CustomerRepositoryTest<Minitest::Test
 
   def test_it_returns_all_customers
     customers = @customers.all
-    assert customers.count > 200
+    assert customers.count > 199
   end
 
   def test_it_returns_all_customers_by_last_name

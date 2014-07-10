@@ -1,6 +1,8 @@
 require 'csv'
+require_relative 'loader'
 
 class Repository
+  include Loader
 
   attr_accessor :objects
 
@@ -9,11 +11,9 @@ class Repository
   end
 
   def initialize(filename)
-    class_name = Kernel.const_get(self.class.to_s.gsub("Repository", ""))
-    @objects   = CSV.open(filename,
-      headers: true, header_converters: :symbol).collect do |row|
-      class_name.new(row)
-    end
+    # class_name = Kernel.const_get(self.class.to_s.gsub("Repository", ""))
+    #loading stuff
+    @objects = load(filename)
   end
 
   def all
