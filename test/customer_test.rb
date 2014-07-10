@@ -13,19 +13,13 @@ class CustomerTest < Minitest::Test
     }
   end
 
-  def test_it_has_attributes
+  def test_customer_attributes
     customer = Customer.new(data)
     assert data[:id],         customer.id
     assert data[:first_name], customer.first_name
     assert data[:last_name],  customer.last_name
     assert data[:created_at], customer.created_at
     assert data[:updated_at], customer.updated_at
-  end
-
-  def test_it_can_read_invoices
-    skip
-    customer = Customer.new(data)
-    raise 'implement me!'
   end
 
 end

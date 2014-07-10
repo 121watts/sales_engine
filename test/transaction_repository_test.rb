@@ -25,9 +25,9 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_all_transactions_by_result
-    failed_transactions = @transactions.find_all_by_result("failed")
-    assert failed_transactions.count >=29
+    failed_transactions     = @transactions.find_all_by_result("failed")
     successful_transactions = @transactions.find_all_by_result("success")
+    assert failed_transactions.count >=29
     assert successful_transactions.count >= 170
   end
 
@@ -41,5 +41,5 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 1, transaction.id
     assert_equal 1, transaction.invoice_id
   end
-  
+
 end
