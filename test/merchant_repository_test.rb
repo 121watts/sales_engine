@@ -18,7 +18,7 @@ class  MerchantRepositoryTest<Minitest::Test
     assert all_merchants.count > 39
   end
 
-  def test_it_returns_an_empty_array_when_nothing_is_found
+  def test_if_nothing_is_found_empty_array_is_returned
     names = @merchants.find_all_by_name("Your Mom is Lame")
     assert_equal [], names
   end
@@ -38,7 +38,7 @@ class  MerchantRepositoryTest<Minitest::Test
     assert_equal 9, merchant.id
   end
 
-  def test_it_returns_multiple_records
+  def test_can_find_multiple_records
     named_merchants = @merchants.find_all_by_name "Williamson Group"
     assert_equal 2, named_merchants.count
   end

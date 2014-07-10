@@ -39,6 +39,11 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 0.4291E2, item.unit_price
   end
 
+  def test_it_finds_first_one_by_merchant_id
+    one_item = @items.find_by_merchant_id(1)
+    assert_equal 751.07, one_item.unit_price.to_f
+  end
+
   def test_it_returns_an_item_by_a_specific_unit_price
     item = @items.find_by_unit_price(0.69338E3)
     assert_equal "Item Dolorem Et", item.name
