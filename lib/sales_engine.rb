@@ -87,6 +87,7 @@ class SalesEngine
       item.merchant      = @merchant_repository.find_by_id(item.merchant_id)
     end
   end
+
 end
 
 

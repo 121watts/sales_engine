@@ -55,4 +55,5 @@ class ItemRepositoryTest < Minitest::Test
     ids = items.find_all_by_merchant_id(1)
     assert ids.count > 10
   end
+
 end

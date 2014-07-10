@@ -33,4 +33,5 @@ class  InvoiceItemRepositoryTest<Minitest::Test
     invoice_item = @invoice_items.find_by_id(1)
     assert_equal 539, invoice_item.item_id
   end
+
 end

@@ -40,4 +40,5 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal 1, invoice.customer_id
     assert_equal 33, invoice.merchant_id
   end
+
 end

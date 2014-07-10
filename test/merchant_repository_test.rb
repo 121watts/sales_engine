@@ -44,4 +44,5 @@ class  MerchantRepositoryTest<Minitest::Test
     named_merchants = merchants.find_all_by_name "Williamson Group"
     assert_equal 2, named_merchants.count
   end
+
 end

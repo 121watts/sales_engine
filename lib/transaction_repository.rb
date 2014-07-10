@@ -6,4 +6,5 @@ class TransactionRepository < Repository
   def inspect
     "#<#{self.class} #{@transactions.size} rows>"
   end
+
 end

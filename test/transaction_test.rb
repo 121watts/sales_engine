@@ -25,4 +25,5 @@ class TransactionTest < Minitest::Test
     assert data[:created_at],                  transaction.created_at
     assert data[:updated_at],                  transaction.updated_at
   end
+
 end

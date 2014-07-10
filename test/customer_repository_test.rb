@@ -32,4 +32,5 @@ class  CustomerRepositoryTest<Minitest::Test
     customer = @customers.find_by_id(7)
     assert_equal "Parker", customer.first_name
   end
+
 end

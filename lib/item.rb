@@ -1,6 +1,7 @@
 require 'bigdecimal'
 
 class Item
+
   attr_reader :id,
               :name,
               :description,
@@ -26,20 +27,5 @@ class Item
     @created_at   = data[:created_at]
     @updated_at   = data[:updated_at]
   end
-
-  # def invoice_items
-    # returns a collection of InvoiceItems
-    # associated with this object.
-  # end
-  #
-  # def merchant
-    # returns an instance of Merchant
-    # associated with this object.
-  # end
-  #
-  # def best_day
-    # returns the date with the most sales
-    # for the given item using the invoice date.
-  # end
 
 end
