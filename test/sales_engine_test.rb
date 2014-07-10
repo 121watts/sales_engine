@@ -15,7 +15,6 @@ class SalesEngineTest < Minitest::Test
     end
   end
 
-  #Tests below tests that all the relationships of all the things have been built
   def test_merchant_relationships_items
     merchant  = engine.merchant_repository.find_by_name("Klein, Rempel and Jones")
     item      = merchant.items.find { |item| item.name == 'Item Adipisci Sint' }

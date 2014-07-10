@@ -7,14 +7,13 @@ class  MerchantRepositoryTest<Minitest::Test
     @merchants = MerchantRepository.new('./test/fixtures/merchants.csv')
   end
 
-  def test_randomness
+  def test_it_returns_a_random_merchant
     merchant1 = @merchants.random
     merchant2 = @merchants.random
-
     assert merchant1 != merchant2
   end
 
-  def test_all_things_gotten
+  def test_it_returns_all_merchants
     all_merchants = @merchants.all
     assert all_merchants.count > 39
   end
@@ -24,22 +23,17 @@ class  MerchantRepositoryTest<Minitest::Test
     assert_equal [], names
   end
 
-  def test_find_all_merchants_by_name
+  def test_it_finds_all_merchants_by_name
     names = @merchants.find_all_by_name("Williamson Group")
     assert names.count >= 2
   end
 
-  def test_find_all_merchants_with_dirty_data
-    names = @merchants.find_all_by_name("Klein, Rempel and Jones")
-    assert names.count >= 1
-  end
-
-  def test_find_by_name_returns_first_instance
+  def test_it_returns_the_first_instance_when_finding_by_name
     merchant = @merchants.find_by_name("Williamson Group")
     assert_equal "2012-03-27 14:53:59 UTC", merchant.created_at
   end
 
-  def test_find_by_id_takes_integers_and_returns_integers
+  def test_it_returns_integers_for_merchant_id
     merchant = @merchants.find_by_id(9)
     assert_equal 9, merchant.id
   end
@@ -48,5 +42,4 @@ class  MerchantRepositoryTest<Minitest::Test
     named_merchants = @merchants.find_all_by_name "Williamson Group"
     assert_equal 2, named_merchants.count
   end
-
 end
