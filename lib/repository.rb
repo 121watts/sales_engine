@@ -1,6 +1,7 @@
 require 'csv'
 
 class Repository
+
   attr_accessor :objects
 
   def inspect
@@ -14,29 +15,6 @@ class Repository
     end
   end
 
-
-  def method_missing(meth, *args, &block)
-    if meth.to_s =~ /^find_by_(.+)$/
-      field_name = meth.to_s.split("find_by_").last
-      @objects.find { |object| object.send(field_name) == args.first }
-    elsif meth.to_s =~ /^find_all_by_(.+)$/
-      field_name = meth.to_s.split("find_all_by_").last
-      @objects.select { |object| object.send(field_name) == args.first }
-    else
-      super
-    end
-  end
-
-  def respond_to?(meth)
-    if meth.to_s =~ /^find_by_.*$/
-      true
-    elsif meth.to_s =~ /^find_all_by_(.+)$/
-      true
-    else
-      super
-    end
-  end
-
   def all
     @objects
   end
@@ -44,4 +22,37 @@ class Repository
   def random
     @objects.sample
   end
+
+  def method_missing(method, *args)
+    case method.to_s
+    when /^find_by_(.+)$/
+      find_by(method, *args)
+    when /^find_all_by_(.+)$/
+      find_all_by(method, *args)
+    else
+      super
+    end
+  end
+
+  def find_by(method, *args)
+    field_name = method.to_s.split("find_by_").last
+    @objects.find { |object| object.send(field_name) == args.first }
+  end
+
+  def find_all_by(method, *args)
+    field_name = method.to_s.split("find_all_by_").last
+    @objects.select { |object| object.send(field_name) == args.first }
+  end
+
+  def respond_to?(method)
+    case method.to_s
+    when /^find_by_.*$/
+      true
+    when /^find_all_by_(.+)$/
+      true
+    else
+      super
+    end
+  end
+
 end
