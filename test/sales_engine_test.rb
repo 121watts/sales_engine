@@ -93,18 +93,18 @@ class SalesEngineTest < Minitest::Test
     assert_equal "Klein, Rempel and Jones", merchant.name
   end
 
+  def test_transaction_relationship_invoice
+    transaction = engine.transaction_repository.find_by_id(11)
+    invoice     = transaction.invoice
+    assert_equal Invoice, invoice.class
+    assert_equal 12,      invoice.id
+  end
+
   def test_customers_relationship_invoices
     customer = engine.customer_repository.find_by_last_name("Daugherty")
     invoice = customer.invoices.find { |invoice| invoice.id == 22 }
     assert                 customer.invoices.count > 7
     assert_equal Customer, invoice.customer.class
-  end
-
-  def test_transaction_invoice_relationships
-    transaction = engine.transaction_repository.find_by_id(11)
-    invoice     = transaction.invoice
-    assert_equal Invoice, invoice.class
-    assert_equal 12,      invoice.id
   end
 
 end
